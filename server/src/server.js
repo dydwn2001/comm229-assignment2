@@ -1,8 +1,13 @@
-const express = require('express')
-const helmet = require('helmet')
-const cors = require('cors')
-const app = express()
-const port = 3000
+import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(helmet());
@@ -16,6 +21,23 @@ app.post('/', (req, res) => {
   res.send(req.body);
 })
 
-app.listen(port, () => {
+async function connect() {
+  console.log('Starting DB connection...');
+  console.log('MONGO_URI:', process.env.MONGO_URI);
+  try{
+    await mongoose.connect(process.env.MONGO_URI);
+  console.log("data base successfully connected");
+  app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}/`)
-})
+});
+
+  }
+  catch(error){
+    console.error("Error is ", error);
+
+  }
+
+  
+
+}
+connect();
