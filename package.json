@@ -7,8 +7,5 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "concurrently": "^9.2.1"
-  }
+  "description": ""
 }
