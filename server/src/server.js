@@ -3,8 +3,11 @@ import helmet from 'helmet';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import {Contacts,Projects,Education,Users} from '../module/module.js'
-
+import ContactCtrl from '../routes/contact.routes.js'
+import qualificationCtrl from '../routes/qualifications.routes.js'
+import projectCtrl from '../routes/projects.routes.js'
+import userCtrl from '../routes/user.routes.js'
+import authCtrl from '../routes/auth.routes.js'
 
 
 
@@ -16,6 +19,11 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
+app.use('/',ContactCtrl)
+app.use('/',qualificationCtrl)
+app.use('/',projectCtrl)
+app.use('/',userCtrl)
+app.use('/',authCtrl)
 app.get('/', (req, res) =>{
   res.json({"message": "Welcome to My Application Portfolio" });
 })
